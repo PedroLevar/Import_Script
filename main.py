@@ -23,7 +23,7 @@ try:
         locations = json.load(file)
     locations = sorted(locations, key=lambda x: x["id"])  # Sorting by ID
     insert_location = """
-    INSERT INTO location (id, name, type, dimension, residents_count) 
+    INSERT INTO location (id, name, type, dimension) 
     VALUES (%s, %s, %s, %s, %s) ON CONFLICT (id) DO NOTHING;
     """
     for loc in locations:
@@ -32,7 +32,6 @@ try:
             loc["name"], 
             loc.get("type", None), 
             loc.get("dimension", None), 
-            loc.get("residents_count", 0)
         ))
     print("Location data inserted successfully.")
 
